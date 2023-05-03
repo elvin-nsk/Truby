@@ -13,6 +13,7 @@ Option Explicit
 ' # Declarations
 
 Private Type typeThis
+    DistanceFactor As Double
     LineColor As Color
     LineWidth As Double
     TextColor As Color
@@ -46,24 +47,28 @@ End Sub
 
 Public Sub SetSizes( _
                ByVal LineWidth As Double, _
-               ByVal TextSize As Double _
+               ByVal TextSize As Double, _
+               ByVal DistanceFactor As Double _
            )
+    This.DistanceFactor = DistanceFactor
     This.LineWidth = LineWidth
     This.TextSize = TextSize
-
 End Sub
 
 Public Function MakeDims( _
                     ByVal Trapezoid As Shape _
                 ) As Shape
+    Dim DistanceX As Double, DistanceY As Double
+    DistanceX = This.DistanceFactor * 80
+    DistanceY = This.DistanceFactor * 50
     Dim Rectangle As Shape
     Set Rectangle = MakeRectangleAroundTrapezoid(Trapezoid)
     Rectangle.Outline.SetNoOutline
     With Rectangle.SnapPointsOfType(cdrSnapPointEdge)
         MakeDim _
-            Rectangle, .Item(1), .Item(2)
+            Rectangle, .Item(1), .Item(2), DistanceX, DistanceY
         MakeDim _
-            Rectangle, .Item(2), .Item(3)
+            Rectangle, .Item(2), .Item(3), DistanceX, DistanceY
     End With
 End Function
 
@@ -73,7 +78,9 @@ End Function
 Private Function MakeDim( _
                      ByVal Shape As Shape, _
                      ByVal Point1 As SnapPoint, _
-                     ByVal Point2 As SnapPoint _
+                     ByVal Point2 As SnapPoint, _
+                     ByVal DistanceX As Double, _
+                     ByVal DistanceY As Double _
                  ) As Shape
     Set MakeDim = _
         ActiveLayer.CreateLinearDimension( _
@@ -81,8 +88,8 @@ Private Function MakeDim( _
             Point1:=Point1, _
             Point2:=Point2, _
             TextCentered:=True, _
-            TextX:=Shape.LeftX - 80, _
-            TextY:=Shape.TopY + 50, _
+            TextX:=Shape.LeftX - DistanceX, _
+            TextY:=Shape.TopY + DistanceY, _
             Style:=cdrDimensionStyleDecimal, _
             Precision:=0, _
             ShowUnits:=False, _
