@@ -63,8 +63,8 @@ End Property
 Private Sub CalcSizes()
     With This
         .Factor = LesserSize(.Page.Shapes.All.BoundingBox)
-        .TextSize = .Factor * 0.4
-        SetDimsRoutine.SetSizes .Factor * 0.002, .TextSize, .Factor * 0.002
+        .TextSize = .Factor * 0.25
+        SetDimsRoutine.SetSizes .Factor * 0.002, .TextSize, .Factor * 0.0015
     End With
 End Sub
 
