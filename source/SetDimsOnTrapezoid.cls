@@ -67,7 +67,10 @@ Public Function MakeDims( _
     With Rectangle.SnapPointsOfType(cdrSnapPointEdge)
         MakeDim _
             Rectangle, .Item(1), .Item(2), DistanceX, DistanceY
-        MakeDim _
+        'тут были размерности на короткой стороне, но они не нужны
+        'какая длинная, а какая короткая - как-то случайно попадает
+        'из-за того, видимо, что это ректанглы изначально
+        'MakeDim _
             Rectangle, .Item(2), .Item(3), DistanceX, DistanceY
     End With
 End Function

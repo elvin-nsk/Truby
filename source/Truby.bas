@@ -1,7 +1,7 @@
 Attribute VB_Name = "Truby"
 '===============================================================================
 '   Макрос          : Truby
-'   Версия          : 2022.05.03
+'   Версия          : 2022.05.11
 '   Сайты           : https://vk.com/elvin_macro
 '                     https://github.com/elvin-nsk
 '   Автор           : elvin-nsk (me@elvin.nsk.ru)
